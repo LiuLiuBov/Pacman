@@ -1,5 +1,3 @@
-package com.company;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +16,7 @@ public class Board extends JPanel implements ActionListener {
 
     private Image ii;
     //найлегше що можна змінити - колір точок
-    private final Color dotColor = new Color(255, 255, 255);
+    private final Color dotColor = new Color(255, 255, 0);
     //колір границь задається в методі initVariables(), змінюємо
     private Color mazeColor;
 
@@ -38,18 +36,18 @@ public class Board extends JPanel implements ActionListener {
     private int pacsLeft, score;
     private int[] dx, dy;
     private int[] ghost_x, ghost_y, ghost_dx, ghost_dy, ghostSpeed;
-// ну картинки 100 проц змінюємо, без питань
+    // ну картинки 100 проц змінюємо, без питань
     private Image ghost;
     private Image pacman1, pacman2up, pacman2left, pacman2right, pacman2down;
     private Image pacman3up, pacman3down, pacman3left, pacman3right;
     private Image pacman4up, pacman4down, pacman4left, pacman4right;
-    
-/*The first two variables store the x and y coordinates of the Pacman sprite.
-The last two variables are the delta changes in horizontal and vertical directions.*/
+
+    /*The first two variables store the x and y coordinates of the Pacman sprite.
+    The last two variables are the delta changes in horizontal and vertical directions.*/
     private int pacman_x, pacman_y, pacmand_x, pacmand_y;
     private int req_dx, req_dy, view_dx, view_dy;//variables controled with keys
 
-//ці цифри створюють карту гри, треба створити свою карту і не одну. Можна зробити декілька рівнів з різними картами
+    //ці цифри створюють карту гри, треба створити свою карту і не одну. Можна зробити декілька рівнів з різними картами
 // як створювати таку карту розказано в першому відео на початку, краще подивитись
     private final short[] levelData = {
             19, 26, 26, 26, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 22,
@@ -75,7 +73,7 @@ The last two variables are the delta changes in horizontal and vertical directio
     private short[] screenData;
     private Timer timer;
 
-// ініціалізуємо вікно, що реагує на кнопки, треба подивитись може можна на бекграунд завантажити якесь фото,
+    // ініціалізуємо вікно, що реагує на кнопки, треба подивитись може можна на бекграунд завантажити якесь фото,
 // а не просто заливку
     private void initBoard() {
 
@@ -83,6 +81,7 @@ The last two variables are the delta changes in horizontal and vertical directio
         setFocusable(true);
         setBackground(Color.black);
     }
+
 
     private void initVariables() {
 
@@ -101,7 +100,7 @@ The last two variables are the delta changes in horizontal and vertical directio
         //відпоідає за швидкість гри, можна поекспериментувати коли будемо робити рівні
         timer.start();
     }
-//-------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------
     @Override
     public void addNotify() {
         super.addNotify();
@@ -116,7 +115,7 @@ The last two variables are the delta changes in horizontal and vertical directio
         N_GHOSTS = 6;
         currentSpeed = 3;
     }
-//ось тут може зможемо змінити метод, щоб у різних рівнів були різні карти
+    //ось тут може зможемо змінити метод, щоб у різних рівнів були різні карти
     private void initLevel() {
 
         int i;
@@ -126,7 +125,7 @@ The last two variables are the delta changes in horizontal and vertical directio
 
         continueLevel();
     }
-//ніхєра не розумію, може тут нічого змінювати і не треба
+    //ніхєра не розумію, може тут нічого змінювати і не треба
     private void continueLevel() {
 
         short i;
@@ -159,7 +158,7 @@ The last two variables are the delta changes in horizontal and vertical directio
         view_dy = 0;
         dying = false;
     }
-// якийсь грьобаний кусок непонятного коду який ніби то не треба змінювати
+    // якийсь грьобаний кусок непонятного коду який ніби то не треба змінювати
     private void doAnim() {
 
         pacAnimCount--;
@@ -193,7 +192,7 @@ The last two variables are the delta changes in horizontal and vertical directio
     private void showIntroScreen(Graphics2D g2d) {
 
 
-        Image background = new ImageIcon("D:\\Могила\\практика\\FPFUw-hXMAQHzMm.jpg").getImage();
+        Image background = new ImageIcon("sticker.jpg").getImage();
 
 //--------------------
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 8 * 0.1f));
@@ -212,7 +211,7 @@ The last two variables are the delta changes in horizontal and vertical directio
         Font verysmall = new Font("Helvetica", Font.BOLD, 11);
         FontMetrics metr = this.getFontMetrics(small);
 
-        g2d.setColor(Color.white);
+        g2d.setColor(Color.YELLOW);
         g2d.setFont(middle);
         g2d.drawString(s, (SCREEN_SIZE - metr.stringWidth(s)) / 2 -20, SCREEN_SIZE / 2-90);
         g2d.setFont(small);
@@ -539,20 +538,20 @@ The last two variables are the delta changes in horizontal and vertical directio
 
     private void loadImages() {
 
-        ghost = new ImageIcon("D:\\Могила\\практика\\pacman2\\ghost.png").getImage();
-        pacman1 = new ImageIcon("D:\\Могила\\практика\\pacman2\\pacman.png").getImage();
-        pacman2up = new ImageIcon("D:\\Могила\\практика\\pacman2\\up1.png").getImage();
-        pacman3up = new ImageIcon("D:\\Могила\\практика\\pacman2\\up2.png").getImage();
-        pacman4up = new ImageIcon("D:\\Могила\\практика\\pacman2\\up3.png").getImage();
-        pacman2down = new ImageIcon("D:\\Могила\\практика\\pacman2\\down1.png").getImage();
-        pacman3down = new ImageIcon("D:\\Могила\\практика\\pacman2\\down2.png").getImage();
-        pacman4down = new ImageIcon("D:\\Могила\\практика\\pacman2\\down3.png").getImage();
-        pacman2left = new ImageIcon("D:\\Могила\\практика\\pacman2\\left1.png").getImage();
-        pacman3left = new ImageIcon("D:\\Могила\\практика\\pacman2\\left2.png").getImage();
-        pacman4left = new ImageIcon("D:\\Могила\\практика\\pacman2\\left3.png").getImage();
-        pacman2right = new ImageIcon("D:\\Могила\\практика\\pacman2\\right1.png").getImage();
-        pacman3right = new ImageIcon("D:\\Могила\\практика\\pacman2\\right2.png").getImage();
-        pacman4right = new ImageIcon("D:\\Могила\\практика\\pacman2\\right3.png").getImage();
+        ghost = new ImageIcon("ghost.png").getImage();
+        pacman1 = new ImageIcon("pacman.png").getImage();
+        pacman2up = new ImageIcon("up1.png").getImage();
+        pacman3up = new ImageIcon("up2.png").getImage();
+        pacman4up = new ImageIcon("up3.png").getImage();
+        pacman2down = new ImageIcon("down1.png").getImage();
+        pacman3down = new ImageIcon("down2.png").getImage();
+        pacman4down = new ImageIcon("down3.png").getImage();
+        pacman2left = new ImageIcon("left1.png").getImage();
+        pacman3left = new ImageIcon("left2.png").getImage();
+        pacman4left = new ImageIcon("left3.png").getImage();
+        pacman2right = new ImageIcon("right1.png").getImage();
+        pacman3right = new ImageIcon("right2.png").getImage();
+        pacman4right = new ImageIcon("right3.png").getImage();
 
     }
 
@@ -584,7 +583,7 @@ The last two variables are the delta changes in horizontal and vertical directio
         Toolkit.getDefaultToolkit().sync();
         g2d.dispose();
     }
-//----------------------------ДАЛІ ІДЕ КОД ТЕХНІЧНИЙ, ЩО ЗМІНЮВАТИ НЕ ТРЕБА--------------------------------------------------------
+    //----------------------------ДАЛІ ІДЕ КОД ТЕХНІЧНИЙ, ЩО ЗМІНЮВАТИ НЕ ТРЕБА--------------------------------------------------------
     // головний метод що визиває всі інші, не змінюємо
     public Board() {
         loadImages();
@@ -644,7 +643,6 @@ The last two variables are the delta changes in horizontal and vertical directio
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         repaint();
     }
 }
